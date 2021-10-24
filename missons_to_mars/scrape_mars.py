@@ -7,8 +7,8 @@ import pandas as pd
 
 def init_browser():
     # @NOTE: Replace the path with your actual path to the chromedriver
-    executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
+    executable_path = {'executable_path': ChromeDriverManager().install()}
+    return Browser('chrome', **executable_path, headless=False)
 
 
 def scrape_all():
@@ -16,7 +16,8 @@ def scrape_all():
     # create mars_data dict that we can insert into mongo later 
     mars_data = {} 
 
-    # visiting url-nasa news 
+
+    # visiting url-nasa news   
     url = 'https://redplanetscience.com/'
     browser.visit(url)
     # HTML object
@@ -24,11 +25,11 @@ def scrape_all():
     # Parse HTML with Beautiful Soup
     soup = BeautifulSoup(html, 'html.parser')
     #getting latest title and paragraph
-    first_title = soup.find(class_="content_title") 
-    first_para = soup.find('div', class_="article_teaser_body")
+    first_title = soup.find(class_="content_title").text
+    first_para = soup.find('div', class_="article_teaser_body").text
 
     
-    #getting featured image 
+    #getting featured image     
     url_img="https://spaceimages-mars.com/"
     browser.visit(url_img) 
     # HTML object
@@ -53,7 +54,7 @@ def scrape_all():
     #convert into html
     facts_html=df.to_html()
 
-    # Mars Hemispheres
+    # Mars Hemispheres    
     base_url='https://marshemispheres.com/'
     browser.visit(base_url)  
     # HTML object
@@ -93,7 +94,7 @@ def scrape_all():
         "news_paragraph": first_para,
         "featured_image": featured_image_url,
         "facts": facts_html,
-        "hemispheres": hemisphere_image_urls,
+        "hemispheres": hemisphere_image_urls
     }
     # Close the browser after scraping
     browser.quit()

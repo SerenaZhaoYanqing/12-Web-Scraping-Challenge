@@ -21,25 +21,43 @@
       <div class="row">
           <div class="col-sm-12">
               <h3>Latest Mars News</h3>
-              <h5>{{mars.news_title}}</h5> 
+              <h4>{{mars.news_title}}</h4> 
               <p>{{mars.news_paragraph}}</p>
-          </div>
-      </div>
+            </div>
+            <hr>
+            <br>
+            <div class="row">
+                <div class="col-sm-8">
+                    <h3>Featured Mars Image </h3>
+                    <img src="{{ mars.featured_image}}", class="img-fluid", alt="Featured Image">
+                </div>
       <hr>
       <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <div class="col-sm-4">
+        <h5>Mars Facts</h5>
+        {{ mars.facts|safe}}
+    </div>
+  </div>
+    <hr>
+    <div class="row">
+      <h3>Mars hemispheres </h3>
+      <div class="col-sm-3">
+          <img src="{{ mars.hemispheres[0]['img url']}}", alt="1" style="width:100%">
+          <h5 class="card-title">{{ mars.hemispheres[0]['title']}}</h5>
+          </div>
+      <div class="col-sm-3">
+          <img src="{{mars.hemispheres[1]['img url']}}", alt="2" style="width:100%">
+          <h5 class="card-title">{{ mars.hemispheres[1]['title']}}</h5>
+          </div>
+      <div class="col-sm-3">
+          <img src="{{mars.hemispheres[2]['img url']}}" , alt="3" style="width:100%">
+          <h5 class="card-title">{{ mars.hemispheres[2]['title']}}</h5>
+          </div>
+        <div class="col-sm-3">
+            <img src="{{mars.hemispheres[3]['img url']}}", alt="4" style="width:100%">
+           <h5 class="card-title">{{ mars.hemispheres[3]['title']}}</h5>
+    </div>
+      </div>  
+  </div>  
 </body>
 </html>
